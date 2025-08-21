@@ -1,0 +1,23 @@
+{
+  "name": "Branch creation",
+  "target": "branch",
+  "source_type": "Repository",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "exclude": [
+        "refs/heads/HOTFIX-*",
+        "refs/heads/FEATURE-*",
+        "refs/heads/FIX-*",
+        "refs/heads/MODULE-*"
+      ],
+      "include": []
+    }
+  },
+  "rules": [
+    {
+      "type": "creation"
+    }
+  ],
+  "bypass_actors": []
+}
