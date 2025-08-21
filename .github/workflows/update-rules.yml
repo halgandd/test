@@ -1,0 +1,37 @@
+name: Update Ruleset
+
+on:
+  push:
+    branches:
+      - prod*
+      - main*
+      - master*
+    paths:
+    - '.github/rules/*.json'
+
+jobs:
+  update-rules:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      administration: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Update Rule Set via API
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          REPO_OWNER="${{ github.repository_owner }}"
+          REPO_NAME="$(basename ${{ github.repository }})"
+          echo "Apply ruleset on : $REPO_OWNER/$REPO_NAME"
+          for ruleset in .github/rules/*.json; do
+            curl -X POST \
+                -H "Authorization: token ${GITHUB_TOKEN}" \
+                -H "Accept: application/vnd.github+json" \
+                -H "X-GitHub-Api-Version: 2022-11-28" \
+                "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/rulesets" \
+                -d @"$ruleset_file"
+          done
