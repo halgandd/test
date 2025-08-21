@@ -20,7 +20,7 @@ jobs:
           SOURCE_BRANCH="${{ github.event.pull_request.head.ref }}"
           TARGET_BRANCH="${{ github.event.pull_request.base.ref }}"
           echo "Source branch: $SOURCE_BRANCH"
-          echo "Target branch: TARGET_BRANCH"
+          echo "Target branch: $TARGET_BRANCH"
           
           if [[ ! "$SOURCE_BRANCH" =~ ^(MEP|RELEASE|HOTFIX).* ]]; then
             echo "❌ ERREUR: Les Pull Requests vers $TARGET_BRANCH doivent provenir de branches commençant par 'MEP', 'RELEASE' ou 'HOTFIX'"
