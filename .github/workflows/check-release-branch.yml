@@ -1,0 +1,27 @@
+name: release-pr
+
+on:
+  pull_request:
+    branches:
+      - prod*
+      - main*
+      - master*
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-source-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if source branch starts with MEP
+        run: |
+          SOURCE_BRANCH="${{ github.head_ref }}"
+          echo "Source branch: $SOURCE_BRANCH"
+          
+          if [[ ! "$SOURCE_BRANCH" =~ ^(MEP|RELEASE).* ]]; then
+            echo "❌ ERREUR: Les Pull Requests vers main doivent provenir de branches commençant par 'MEP' ou 'RELEASE'"
+            echo "Branche source actuelle: $SOURCE_BRANCH"
+            echo "Exemples de branches valides: MEP-hotfix, RELEASE-1.0, MEP123, RELEASE-2024-01"
+            exit 1
+          fi
+          
+          echo "✅ Nom de branche valide: $SOURCE_BRANCH"
