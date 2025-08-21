@@ -18,7 +18,7 @@ jobs:
           echo "Source branch: $SOURCE_BRANCH"
           
           if [[ ! "$SOURCE_BRANCH" =~ ^(MEP|RELEASE).* ]]; then
-            echo "❌ ERREUR: Les Pull Requests vers main doivent provenir de branches commençant par 'MEP' ou 'RELEASE'"
+            echo "❌ ERREUR: Les Pull Requests vers ${{ github.head_ref }} doivent provenir de branches commençant par 'MEP' ou 'RELEASE'"
             echo "Branche source actuelle: $SOURCE_BRANCH"
             echo "Exemples de branches valides: MEP-hotfix, RELEASE-1.0, MEP123, RELEASE-2024-01"
             exit 1
