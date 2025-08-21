@@ -9,10 +9,11 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  check-source-branch:
+  check-source-branch-for-release:
     runs-on: ubuntu-latest
     steps:
-      - name: Check if source branch starts with MEP
+      - name: Check if source branch starts with MEP, RELEASE or HOTFIX
+        run-name: Check if source branch starts with MEP, RELEASE or HOTFIX
         run: |
           SOURCE_BRANCH="${{ github.event.pull_request.head.ref }}"
           TARGET_BRANCH="${{ github.event.pull_request.base.ref }}"
