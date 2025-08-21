@@ -1,4 +1,5 @@
 name: release-pr
+run-name: Check if source branch starts with MEP, RELEASE or HOTFIX
 
 on:
   pull_request:
@@ -8,10 +9,10 @@ on:
       - master*
     types: [opened, synchronize, reopened]
 
+
 jobs:
   check-source-branch-for-release:
     runs-on: ubuntu-latest
-    run-name: Check if source branch starts with MEP, RELEASE or HOTFIX
     steps:
       - name: Check if source branch starts with MEP, RELEASE or HOTFIX
         run: |
