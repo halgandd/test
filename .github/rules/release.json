@@ -24,7 +24,7 @@
       "parameters": {
         "required_status_checks": [
           {
-            "context": "check-source-branch-for-release",
+            "context": "Check branch source MEP/RELEASE/HOTFIX",
             "integration_id": null
           },
           {
