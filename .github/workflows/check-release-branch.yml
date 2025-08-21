@@ -12,6 +12,7 @@ on:
 
 jobs:
   check-source-branch-for-release:
+    name: "Check branch source MEP/RELEASE/HOTFIX"
     runs-on: ubuntu-latest
     steps:
       - name: Check if source branch starts with MEP, RELEASE or HOTFIX
