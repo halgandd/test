@@ -14,7 +14,8 @@ jobs:
     steps:
       - name: Check if source branch starts with MEP
         run: |
-          SOURCE_BRANCH="${{ github.head_ref }}"
+          SOURCE_BRANCH="${{ github.event.pull_request.head.ref }}"
+          TARGET_BRANCH="${{ github.event.pull_request.base.ref }}"
           echo "Source branch: $SOURCE_BRANCH"
           echo "Target branch: TARGET_BRANCH"
           
