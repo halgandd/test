@@ -24,17 +24,17 @@ jobs:
       - name: Update or Create Unit Test Branch
         run: |
           # Vérifier si la branche existe déjà localement ou en remote
-          if git show-ref --verify --quiet refs/remotes/origin/daily-testing; then
-            echo "Branch daily-testing exists, checking it out"
-            git checkout daily-testing
-            git pull origin daily-testing
+          if git show-ref --verify --quiet refs/remotes/origin/DAILY-TESTING; then
+            echo "Branch DAILY-TESTING exists, checking it out"
+            git checkout DAILY-TESTING
+            git pull origin DAILY-TESTING
           else
-            echo "Creating new branch daily-testing"
-            git checkout -b daily-testing
+            echo "Creating new branch DAILY-TESTING"
+            git checkout -b DAILY-TESTING
           fi
           
           # Merge ou rebase avec la branche par défaut
           git merge origin/${{ github.event.repository.default_branch }} --no-ff
           
           # Push la branche (créée ou mise à jour)
-          git push origin daily-testing
+          git push origin DAILY-TESTING
