@@ -7,13 +7,30 @@ on:
 
 
 jobs:
-  pre-commit:
+  ut-branch:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
       - name: Update or Create Unit Test Branch
         run: |
-          git status
-          git checkout -b daily-testing
-          git pull origin ${{ github.event.repository.default_branch }}
+          # Vérifier si la branche existe déjà localement ou en remote
+          if git show-ref --verify --quiet refs/remotes/origin/daily-testing; then
+            echo "Branch daily-testing exists, checking it out"
+            git checkout daily-testing
+            git pull origin daily-testing
+          else
+            echo "Creating new branch daily-testing"
+            git checkout -b daily-testing
+          fi
+          
+          # Merge ou rebase avec la branche par défaut
+          git merge origin/${{ github.event.repository.default_branch }} --no-ff
+          
+          # Push la branche (créée ou mise à jour)
           git push origin daily-testing
