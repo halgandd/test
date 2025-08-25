@@ -14,3 +14,6 @@ jobs:
       - name: Update or Create Unit Test Branch
         run: |
           git status
+          git checkout -b daily-testing
+          git pull origin ${{ github.event.repository.default_branch }}
+          git push origin daily-testing
