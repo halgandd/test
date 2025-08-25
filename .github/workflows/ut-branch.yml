@@ -1,4 +1,4 @@
-name: pre-commit
+name: ut-branch
 
 on:
   workflow_dispatch:
